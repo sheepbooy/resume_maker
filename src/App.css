@@ -1,0 +1,74 @@
+.app {
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+.app-header {
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+}
+
+.app-header p {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.preview-panel {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  overflow-y: auto;
+  min-height: calc(100vh - 80px);
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
