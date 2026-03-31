@@ -41,6 +41,11 @@ dist/
 .cache/
 .temp/
 
+# Lock files (optional, uncomment if you don't want to commit)
+# package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
 # Superpowers (Claude plugin)
 .superpowers/
 .claude/
