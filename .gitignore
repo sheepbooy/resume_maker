@@ -44,3 +44,4 @@ dist/
 # Superpowers (Claude plugin)
 .superpowers/
 .claude/
+.vite/
