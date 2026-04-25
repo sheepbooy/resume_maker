@@ -6,66 +6,369 @@ interface ProfessionalResumeProps {
 
 export default function ProfessionalResume({ data }: ProfessionalResumeProps) {
   return (
-    <div className="professional-resume" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    <div
+      className="professional-resume"
+      style={{
+        backgroundColor: '#fdfcf7',
+        color: '#2c3136',
+        padding: '48px 44px',
+        maxWidth: '21cm',
+        margin: '0 auto',
+      }}
+    >
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-black mb-2">{data.profile.name || '您的姓名'}</h1>
-        <div className="flex flex-wrap gap-3 text-sm text-gray-700">
+      <div
+        style={{
+          textAlign: 'center',
+          marginBottom: '36px',
+          paddingBottom: '24px',
+          borderBottom: '2px solid #1e3a5f',
+        }}
+      >
+        <h1
+          style={{
+            fontFamily: 'Lora, serif',
+            fontSize: '30px',
+            fontWeight: 600,
+            color: '#1e3a5f',
+            margin: '0 0 6px 0',
+            letterSpacing: '0.5px',
+          }}
+        >
+          {data.profile.name || '您的姓名'}
+        </h1>
+        <p
+          style={{
+            fontFamily: 'Manrope, sans-serif',
+            fontSize: '13px',
+            color: '#1e3a5f',
+            fontWeight: 500,
+            margin: '0 0 16px 0',
+            letterSpacing: '0.3px',
+          }}
+        >
+          {data.experience[0]?.position || '专业人才'}
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: '8px 24px',
+            fontFamily: 'Manrope, sans-serif',
+            fontSize: '12px',
+            color: '#5b6269',
+          }}
+        >
           {data.profile.email && <span>{data.profile.email}</span>}
           {data.profile.phone && <span>{data.profile.phone}</span>}
           {data.profile.location && <span>{data.profile.location}</span>}
+          {data.profile.linkedin && <span>{data.profile.linkedin}</span>}
         </div>
       </div>
 
       {/* Experience */}
       {data.experience.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b-2 border-black pb-1">工作经验</h2>
-          <div className="space-y-5">
-            {data.experience.map((exp) => (
-              <div key={exp.id} style={{ borderLeft: '3px solid #4b5563', paddingLeft: '12px' }}>
-                <div className="flex justify-between items-baseline mb-1">
-                  <h3 className="font-bold text-gray-900 text-base">{exp.company || '公司名称'}</h3>
-                  <span className="text-gray-500 text-xs">{exp.startDate} - {exp.endDate}</span>
-                </div>
-                <p className="font-semibold text-gray-900 text-sm mb-2">{exp.position || '职位'}</p>
-                <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{exp.description}</p>
+        <div style={{ marginBottom: '32px' }}>
+          <h2
+            style={{
+              fontFamily: 'Lora, serif',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#1e3a5f',
+              margin: '0 0 16px 0',
+              paddingBottom: '6px',
+              borderBottom: '1px solid #d4cfc6',
+              letterSpacing: '0.3px',
+            }}
+          >
+            工作经历
+          </h2>
+          {data.experience.map((exp) => (
+            <div
+              key={exp.id}
+              style={{
+                border: '1px solid #e3dfd6',
+                borderRadius: '4px',
+                padding: '16px 18px',
+                marginBottom: '14px',
+                backgroundColor: '#ffffff',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  marginBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: '#1e3a5f',
+                  }}
+                >
+                  {exp.company || '公司名称'}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '11px',
+                    color: '#8b9298',
+                    fontWeight: 500,
+                  }}
+                >
+                  {exp.startDate} – {exp.endDate}
+                </span>
               </div>
-            ))}
-          </div>
+              <p
+                style={{
+                  fontFamily: 'Lora, serif',
+                  fontSize: '13px',
+                  fontStyle: 'italic',
+                  fontWeight: 500,
+                  color: '#3e454b',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                {exp.position || '职位'}
+              </p>
+              <p
+                style={{
+                  fontFamily: 'Manrope, sans-serif',
+                  fontSize: '12px',
+                  lineHeight: '1.65',
+                  color: '#4a5259',
+                  margin: 0,
+                }}
+              >
+                {exp.description}
+              </p>
+            </div>
+          ))}
         </div>
       )}
 
       {/* Education */}
       {data.education.length > 0 && (
-        <div className="mb-6">
-          <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b-2 border-black pb-1">教育背景</h2>
-          <div className="space-y-3">
-            {data.education.map((edu) => (
-              <div key={edu.id}>
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-semibold text-gray-900 text-sm">{edu.school || '学校名称'}</h3>
-                  <span className="text-gray-500 text-xs">{edu.startDate} - {edu.endDate}</span>
-                </div>
-                <p className="text-gray-800 font-medium text-sm">{edu.degree || '学位/专业'}</p>
-                {edu.description && <p className="text-gray-600 text-xs mt-1">{edu.description}</p>}
+        <div style={{ marginBottom: '32px' }}>
+          <h2
+            style={{
+              fontFamily: 'Lora, serif',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#1e3a5f',
+              margin: '0 0 16px 0',
+              paddingBottom: '6px',
+              borderBottom: '1px solid #d4cfc6',
+              letterSpacing: '0.3px',
+            }}
+          >
+            教育背景
+          </h2>
+          {data.education.map((edu) => (
+            <div
+              key={edu.id}
+              style={{
+                border: '1px solid #e3dfd6',
+                borderRadius: '4px',
+                padding: '14px 18px',
+                marginBottom: '12px',
+                backgroundColor: '#ffffff',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  marginBottom: '2px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: '#1e3a5f',
+                  }}
+                >
+                  {edu.school || '学校名称'}
+                </span>
+                <span
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '11px',
+                    color: '#8b9298',
+                  }}
+                >
+                  {edu.startDate} – {edu.endDate}
+                </span>
               </div>
-            ))}
+              <p
+                style={{
+                  fontFamily: 'Manrope, sans-serif',
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  color: '#3e454b',
+                  margin: '0 0 4px 0',
+                }}
+              >
+                {edu.degree || '学位/专业'}
+              </p>
+              {edu.description && (
+                <p
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '11px',
+                    color: '#6b737a',
+                    margin: 0,
+                  }}
+                >
+                  {edu.description}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Skills — bar chart style */}
+      {data.skills.length > 0 && (
+        <div style={{ marginBottom: '32px' }}>
+          <h2
+            style={{
+              fontFamily: 'Lora, serif',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#1e3a5f',
+              margin: '0 0 16px 0',
+              paddingBottom: '6px',
+              borderBottom: '1px solid #d4cfc6',
+              letterSpacing: '0.3px',
+            }}
+          >
+            专业技能
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {data.skills.map((skill, index) => {
+              const width = 50 + (index * 10) % 40
+              return (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span
+                    style={{
+                      fontFamily: 'Manrope, sans-serif',
+                      fontSize: '12px',
+                      fontWeight: 500,
+                      color: '#2c3136',
+                      minWidth: '110px',
+                      textAlign: 'right',
+                    }}
+                  >
+                    {skill || '技能'}
+                  </span>
+                  <div
+                    style={{
+                      flex: 1,
+                      height: '8px',
+                      backgroundColor: '#e8e5dd',
+                      borderRadius: '4px',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: `${width}%`,
+                        height: '100%',
+                        backgroundColor: '#1e3a5f',
+                        borderRadius: '4px',
+                      }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
 
-      {/* Skills */}
-      {data.skills.length > 0 && (
+      {/* Projects */}
+      {data.projects.length > 0 && (
         <div>
-          <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b-2 border-black pb-1">专业技能</h2>
-          <div className="flex flex-wrap gap-2">
-            {data.skills.map((skill, index) => (
-              <span key={index} style={{ padding: '4px 10px', backgroundColor: '#f3f4f6', border: '1px solid #e5e7eb', borderRadius: '4px', fontSize: '12px', color: '#374151' }}>
-                {skill || '技能'}
-              </span>
-            ))}
-          </div>
+          <h2
+            style={{
+              fontFamily: 'Lora, serif',
+              fontSize: '16px',
+              fontWeight: 600,
+              color: '#1e3a5f',
+              margin: '0 0 16px 0',
+              paddingBottom: '6px',
+              borderBottom: '1px solid #d4cfc6',
+              letterSpacing: '0.3px',
+            }}
+          >
+            项目经历
+          </h2>
+          {data.projects.map((proj) => (
+            <div
+              key={proj.id}
+              style={{
+                border: '1px solid #e3dfd6',
+                borderRadius: '4px',
+                padding: '14px 18px',
+                marginBottom: '12px',
+                backgroundColor: '#ffffff',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '8px',
+                  marginBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'Manrope, sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    color: '#1e3a5f',
+                  }}
+                >
+                  {proj.name || '项目名称'}
+                </span>
+                {proj.link && (
+                  <a
+                    href={proj.link}
+                    style={{
+                      fontFamily: 'Manrope, sans-serif',
+                      fontSize: '11px',
+                      color: '#1e3a5f',
+                      textDecoration: 'underline',
+                      opacity: 0.7,
+                    }}
+                  >
+                    {proj.link}
+                  </a>
+                )}
+              </div>
+              <p
+                style={{
+                  fontFamily: 'Manrope, sans-serif',
+                  fontSize: '12px',
+                  lineHeight: '1.65',
+                  color: '#4a5259',
+                  margin: 0,
+                }}
+              >
+                {proj.description}
+              </p>
+            </div>
+          ))}
         </div>
       )}
     </div>

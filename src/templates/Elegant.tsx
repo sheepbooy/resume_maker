@@ -5,65 +5,227 @@ interface ElegantResumeProps {
 }
 
 export default function ElegantResume({ data }: ElegantResumeProps) {
+  const divider = (
+    <div style={{ textAlign: 'center', margin: '18px 0', color: '#e8a0bf', fontSize: '16px', lineHeight: 1 }}>
+      — — — ✦ — — —
+    </div>
+  )
+
   return (
-    <div className="elegant-resume" style={{ fontFamily: '"Georgia", "Times New Roman", serif' }}>
-      {/* Header */}
-      <div className="text-center border-b-2 border-black pb-6 mb-8">
-        <h1 className="text-3xl font-serif font-bold text-black mb-3">{data.profile.name || '您的姓名'}</h1>
-        <div className="flex flex-wrap justify-center gap-3 text-gray-700 text-sm">
+    <div
+      className="elegant-resume"
+      style={{
+        fontFamily: 'Cormorant Garamond, serif',
+        backgroundColor: '#fdfbf7',
+        padding: '8px 4px',
+        color: '#1a4a3a',
+      }}
+    >
+      {/* Header — centered elegant */}
+      <div style={{ textAlign: 'center', marginBottom: '10px' }}>
+        <h1
+          style={{
+            fontSize: '32px',
+            fontWeight: 600,
+            letterSpacing: '0.03em',
+            color: '#1a4a3a',
+            marginBottom: '6px',
+          }}
+        >
+          {data.profile.name || '您的姓名'}
+        </h1>
+        <div
+          className="flex flex-wrap justify-center gap-x-4 gap-y-1"
+          style={{ fontSize: '14px', fontStyle: 'italic', color: '#4a6b5e' }}
+        >
           {data.profile.email && <span>{data.profile.email}</span>}
-          {data.profile.phone && <span>• {data.profile.phone}</span>}
-          {data.profile.location && <span>• {data.profile.location}</span>}
+          {data.profile.phone && <span>{data.profile.phone}</span>}
+          {data.profile.location && <span>{data.profile.location}</span>}
         </div>
+        {(data.profile.linkedin || data.profile.github) && (
+          <div style={{ fontSize: '13px', marginTop: '2px', color: '#e8a0bf' }}>
+            {data.profile.linkedin && <span>{data.profile.linkedin}</span>}
+            {data.profile.linkedin && data.profile.github && <span> &middot; </span>}
+            {data.profile.github && <span>{data.profile.github}</span>}
+          </div>
+        )}
+      </div>
+
+      {/* Decorative flourish after header */}
+      <div style={{ textAlign: 'center', color: '#e8a0bf', fontSize: '18px', marginBottom: '8px' }}>
+        ❀
       </div>
 
       {/* Experience */}
       {data.experience.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-lg font-serif font-bold text-black border-b border-gray-300 pb-1 mb-4">工作经历</h2>
-          <div className="space-y-5">
-            {data.experience.map((exp) => (
-              <div key={exp.id} style={{ borderLeft: '2px solid #4b5563', paddingLeft: '16px' }}>
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-serif font-semibold text-black">{exp.company || '公司名称'}</h3>
-                  <span className="text-gray-600 text-sm italic">{exp.startDate} - {exp.endDate}</span>
+        <>
+          <div style={{ marginBottom: '20px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: 600,
+                color: '#1a4a3a',
+                letterSpacing: '0.04em',
+                marginBottom: '10px',
+              }}
+            >
+              工作经历
+            </h2>
+            <div className="space-y-4">
+              {data.experience.map((exp) => (
+                <div key={exp.id}>
+                  <div className="flex justify-between items-baseline">
+                    <span
+                      style={{
+                        fontWeight: 600,
+                        fontSize: '15px',
+                        color: '#1a4a3a',
+                      }}
+                    >
+                      {exp.company || '公司名称'}
+                    </span>
+                    <span style={{ fontSize: '12px', fontStyle: 'italic', color: '#e8a0bf' }}>
+                      {exp.startDate} - {exp.endDate}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '14px', fontStyle: 'italic', color: '#e8a0bf', marginBottom: '4px' }}>
+                    {exp.position || '职位'}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: '13px',
+                      color: '#4a6b5e',
+                      lineHeight: 1.6,
+                      whiteSpace: 'pre-line',
+                    }}
+                  >
+                    {exp.description}
+                  </p>
                 </div>
-                <p className="text-gray-900 font-medium text-sm mb-2">{exp.position || '职位'}</p>
-                <p className="text-gray-700 text-justify text-sm leading-relaxed whitespace-pre-line">{exp.description}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+          {divider}
+        </>
       )}
 
       {/* Education */}
       {data.education.length > 0 && (
-        <div className="mb-8">
-          <h2 className="text-lg font-serif font-bold text-black border-b border-gray-300 pb-1 mb-4">教育背景</h2>
-          <div className="space-y-4">
-            {data.education.map((edu) => (
-              <div key={edu.id}>
-                <div className="flex justify-between items-baseline">
-                  <h3 className="font-serif font-semibold text-black">{edu.school || '学校名称'}</h3>
-                  <span className="text-gray-600 text-sm italic">{edu.startDate} - {edu.endDate}</span>
+        <>
+          <div style={{ marginBottom: '20px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: 600,
+                color: '#1a4a3a',
+                letterSpacing: '0.04em',
+                marginBottom: '10px',
+              }}
+            >
+              教育背景
+            </h2>
+            <div className="space-y-3">
+              {data.education.map((edu) => (
+                <div key={edu.id}>
+                  <div className="flex justify-between items-baseline">
+                    <span style={{ fontWeight: 600, fontSize: '15px', color: '#1a4a3a' }}>
+                      {edu.school || '学校名称'}
+                    </span>
+                    <span style={{ fontSize: '12px', fontStyle: 'italic', color: '#e8a0bf' }}>
+                      {edu.startDate} - {edu.endDate}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: '14px', color: '#4a6b5e' }}>{edu.degree || '学位/专业'}</p>
+                  {edu.description && (
+                    <p style={{ fontSize: '13px', color: '#4a6b5e', marginTop: '2px' }}>
+                      {edu.description}
+                    </p>
+                  )}
                 </div>
-                <p className="text-gray-800 text-sm">{edu.degree || '学位/专业'}</p>
-                {edu.description && <p className="text-gray-600 text-sm mt-1">{edu.description}</p>}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+          {divider}
+        </>
       )}
 
       {/* Skills */}
       {data.skills.length > 0 && (
+        <>
+          <div style={{ marginBottom: '20px' }}>
+            <h2
+              style={{
+                fontSize: '18px',
+                fontWeight: 600,
+                color: '#1a4a3a',
+                letterSpacing: '0.04em',
+                marginBottom: '10px',
+              }}
+            >
+              专业技能
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {data.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  style={{
+                    fontSize: '13px',
+                    color: '#1a4a3a',
+                    padding: '4px 14px',
+                    border: '1px solid #e8a0bf',
+                    borderRadius: '9999px',
+                    fontStyle: 'italic',
+                  }}
+                >
+                  {skill || '技能'}
+                </span>
+              ))}
+            </div>
+          </div>
+          {divider}
+        </>
+      )}
+
+      {/* Projects */}
+      {data.projects.length > 0 && (
         <div>
-          <h2 className="text-lg font-serif font-bold text-black border-b border-gray-300 pb-1 mb-4">专业技能</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-            {data.skills.map((skill, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span style={{ color: '#4b5563' }}>•</span>
-                <span className="text-gray-800 text-sm">{skill}</span>
+          <h2
+            style={{
+              fontSize: '18px',
+              fontWeight: 600,
+              color: '#1a4a3a',
+              letterSpacing: '0.04em',
+              marginBottom: '10px',
+            }}
+          >
+            项目经历
+          </h2>
+          <div className="space-y-3">
+            {data.projects.map((proj) => (
+              <div key={proj.id}>
+                <div className="flex items-center justify-between">
+                  <span style={{ fontWeight: 600, fontSize: '15px', color: '#1a4a3a' }}>
+                    {proj.name || '项目名称'}
+                  </span>
+                  {proj.link && (
+                    <a
+                      href={proj.link}
+                      style={{
+                        fontSize: '12px',
+                        color: '#e8a0bf',
+                        fontStyle: 'italic',
+                        textDecoration: 'none',
+                      }}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      ouvrir ↗
+                    </a>
+                  )}
+                </div>
+                <p style={{ fontSize: '13px', color: '#4a6b5e', marginTop: '2px' }}>
+                  {proj.description}
+                </p>
               </div>
             ))}
           </div>

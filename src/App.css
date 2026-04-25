@@ -1,31 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Bricolage+Grotesk:wght@400;500;600;700&family=Onest:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;600;700;800&display=swap');
+
 .app {
   min-height: 100vh;
-  background: #f1f5f9;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
 }
 
 .app-header {
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 1rem 2rem;
-  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 0.875rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 .app-header h1 {
-  font-size: 1.5rem;
-  color: #1e293b;
-  margin-bottom: 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
 }
 
 .app-header p {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   color: #64748b;
+  margin-top: 0.1rem;
 }
 
 .app-main {
   display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: 420px 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem;
   max-width: 1600px;
   margin: 0 auto;
 }
@@ -33,24 +41,31 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  height: calc(100vh - 80px);
+  gap: 1.25rem;
+  height: calc(100vh - 88px);
   overflow-y: auto;
-  padding-right: 0.5rem;
+  padding-right: 0.25rem;
+}
+
+.sidebar > * {
+  flex-shrink: 0;
 }
 
 .preview-panel {
-  background: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
   padding: 2rem;
   overflow-y: auto;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 88px);
 }
 
 /* Scrollbar styling */
 .sidebar::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .sidebar::-webkit-scrollbar-track {
@@ -59,7 +74,17 @@
 
 .sidebar::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 3px;
+  border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Resume preview container */
+.resume-preview-wrapper {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 8px 32px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.6);
 }
 
 @media (max-width: 1024px) {
@@ -70,5 +95,16 @@
   .sidebar {
     flex-direction: row;
     flex-wrap: wrap;
+    height: auto;
   }
+}
+
+/* PDF Export button enhancements */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.export-btn-loading {
+  animation: pulse-subtle 1.5s ease-in-out infinite;
 }

@@ -6,86 +6,313 @@ interface MinimalResumeProps {
 
 export default function MinimalResume({ data }: MinimalResumeProps) {
   return (
-    <div className="minimal-resume" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      {/* Header */}
-      <div className="border-b-2 border-black pb-6 mb-6">
-        <h1 className="text-3xl font-bold text-black mb-3">{data.profile.name || '您的姓名'}</h1>
-        <div className="flex flex-wrap gap-4 text-gray-700 text-sm">
-          {data.profile.email && <span>{data.profile.email}</span>}
-          {data.profile.phone && <span>{data.profile.phone}</span>}
+    <div
+      className="minimal-resume"
+      style={{
+        fontFamily: '"IBM Plex Mono", monospace',
+        backgroundColor: '#ffffff',
+        color: '#000000',
+        padding: '44px 40px',
+        maxWidth: '21cm',
+        margin: '0 auto',
+      }}
+    >
+      {/* Header — stark name */}
+      <div style={{ marginBottom: '40px' }}>
+        <h1
+          style={{
+            fontSize: '32px',
+            fontWeight: 700,
+            color: '#000000',
+            margin: '0 0 12px 0',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+          }}
+        >
+          {data.profile.name || '您的姓名'}
+        </h1>
+        <p
+          style={{
+            fontSize: '10px',
+            margin: '0 0 14px 0',
+            color: '#000000',
+            textTransform: 'uppercase',
+            letterSpacing: '1.5px',
+          }}
+        >
+          {data.experience[0]?.position || '专业人才'}
+        </p>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '4px 0',
+            fontSize: '11px',
+            lineHeight: '1.8',
+            color: '#000000',
+          }}
+        >
+          {data.profile.email && (
+            <span style={{ marginRight: '24px' }}>{data.profile.email}</span>
+          )}
+          {data.profile.phone && (
+            <span style={{ marginRight: '24px' }}>{data.profile.phone}</span>
+          )}
           {data.profile.location && <span>{data.profile.location}</span>}
         </div>
       </div>
 
-      {/* Sections */}
-      <div className="space-y-6">
-        {/* Experience */}
-        {data.experience.length > 0 && (
-          <div>
-            <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b border-gray-300 pb-1">工作经历</h2>
-            <div className="space-y-4">
-              {data.experience.map((exp) => (
-                <div key={exp.id}>
-                  <div className="flex justify-between items-baseline mb-1">
-                    <h3 className="font-semibold text-black">{exp.company || '公司名称'}</h3>
-                    <span className="text-gray-500 text-xs">{exp.startDate} - {exp.endDate}</span>
-                  </div>
-                  <p className="font-semibold text-gray-900 text-sm mb-2">{exp.position || '职位'}</p>
-                  <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{exp.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+      {/* Heavy black rules throughout */}
+      <div
+        style={{
+          height: '4px',
+          backgroundColor: '#000000',
+          marginBottom: '36px',
+        }}
+      />
 
-        {/* Education */}
-        {data.education.length > 0 && (
-          <div>
-            <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b border-gray-300 pb-1">教育背景</h2>
-            <div className="space-y-4">
-              {data.education.map((edu) => (
-                <div key={edu.id}>
-                  <div className="flex justify-between items-baseline">
-                    <h3 className="font-semibold text-black">{edu.school || '学校名称'}</h3>
-                    <span className="text-gray-500 text-xs">{edu.startDate} - {edu.endDate}</span>
-                  </div>
-                  <p className="text-gray-700 text-sm mt-1">{edu.degree || '学位/专业'}</p>
-                  {edu.description && <p className="text-gray-600 text-xs mt-1">{edu.description}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Skills */}
-        {data.skills.length > 0 && (
-          <div>
-            <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b border-gray-300 pb-1">技能</h2>
-            <div className="flex flex-wrap gap-2">
-              {data.skills.map((skill, index) => (
-                <span key={index} style={{ padding: '4px 10px', backgroundColor: '#f3f4f6', border: '1px solid #e5e7eb', borderRadius: '4px', fontSize: '12px', color: '#374151' }}>
-                  {skill || '技能'}
+      {/* Experience */}
+      {data.experience.length > 0 && (
+        <div style={{ marginBottom: '36px' }}>
+          <h2
+            style={{
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#000000',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              margin: '0 0 18px 0',
+            }}
+          >
+            // 工作经历
+          </h2>
+          {data.experience.map((exp) => (
+            <div
+              key={exp.id}
+              style={{
+                borderLeft: '4px solid #000000',
+                paddingLeft: '16px',
+                marginBottom: '22px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  marginBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    color: '#000000',
+                  }}
+                >
+                  {exp.company || '公司名称'}
                 </span>
-              ))}
+                <span style={{ fontSize: '10px', color: '#000000' }}>
+                  {exp.startDate}_{exp.endDate}
+                </span>
+              </div>
+              <p
+                style={{
+                  fontSize: '11px',
+                  fontWeight: 600,
+                  color: '#000000',
+                  margin: '0 0 8px 0',
+                }}
+              >
+                {exp.position || '职位'}
+              </p>
+              <p
+                style={{
+                  fontSize: '11px',
+                  lineHeight: '1.6',
+                  color: '#000000',
+                  margin: 0,
+                }}
+              >
+                {exp.description
+                  .split('\n')
+                  .filter(d => d.trim())
+                  .map((line, i, arr) => (
+                    <span key={i}>
+                      {'>'} {line.trim()}
+                      {i < arr.length - 1 && <br />}
+                    </span>
+                  ))}
+              </p>
             </div>
-          </div>
-        )}
+          ))}
+        </div>
+      )}
 
-        {/* Projects */}
-        {data.projects.length > 0 && (
-          <div>
-            <h2 className="text-sm font-bold text-black uppercase tracking-wider mb-3 border-b border-gray-300 pb-1">项目经历</h2>
-            <div className="space-y-3">
-              {data.projects.map((proj) => (
-                <div key={proj.id}>
-                  <h3 className="font-semibold text-black text-sm">{proj.name || '项目名称'}</h3>
-                  <p className="text-gray-700 text-sm mt-1">{proj.description}</p>
-                </div>
-              ))}
+      {/* Education */}
+      {data.education.length > 0 && (
+        <div style={{ marginBottom: '36px' }}>
+          <h2
+            style={{
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#000000',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              margin: '0 0 18px 0',
+            }}
+          >
+            // 教育背景
+          </h2>
+          {data.education.map((edu) => (
+            <div
+              key={edu.id}
+              style={{
+                borderLeft: '4px solid #000000',
+                paddingLeft: '16px',
+                marginBottom: '16px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                  marginBottom: '2px',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    color: '#000000',
+                  }}
+                >
+                  {edu.school || '学校名称'}
+                </span>
+                <span style={{ fontSize: '10px', color: '#000000' }}>
+                  {edu.startDate}_{edu.endDate}
+                </span>
+              </div>
+              <p
+                style={{
+                  fontSize: '11px',
+                  color: '#000000',
+                  margin: 0,
+                }}
+              >
+                {edu.degree || '学位/专业'}
+              </p>
+              {edu.description && (
+                <p
+                  style={{
+                    fontSize: '10px',
+                    color: '#000000',
+                    margin: '4px 0 0 0',
+                  }}
+                >
+                  {edu.description}
+                </p>
+              )}
             </div>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {/* Skills — comma-separated inline */}
+      {data.skills.length > 0 && (
+        <div style={{ marginBottom: '36px' }}>
+          <h2
+            style={{
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#000000',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              margin: '0 0 18px 0',
+            }}
+          >
+            // 专业技能
+          </h2>
+          <p
+            style={{
+              fontSize: '11px',
+              lineHeight: '1.8',
+              color: '#000000',
+              margin: 0,
+            }}
+          >
+            {data.skills.map((s, i) => (
+              <span key={i}>
+                {s || '技能'}
+                {i < data.skills.length - 1 && <span>, </span>}
+              </span>
+            ))}
+          </p>
+        </div>
+      )}
+
+      {/* Projects */}
+      {data.projects.length > 0 && (
+        <div style={{ marginBottom: '0' }}>
+          <h2
+            style={{
+              fontSize: '11px',
+              fontWeight: 700,
+              color: '#000000',
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              margin: '0 0 18px 0',
+            }}
+          >
+            // 项目经历
+          </h2>
+          {data.projects.map((proj) => (
+            <div
+              key={proj.id}
+              style={{
+                borderLeft: '4px solid #000000',
+                paddingLeft: '16px',
+                marginBottom: '16px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '8px',
+                  marginBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    color: '#000000',
+                  }}
+                >
+                  {proj.name || '项目名称'}
+                </span>
+                {proj.link && (
+                  <span style={{ fontSize: '10px', color: '#000000' }}>
+                    [{proj.link}]
+                  </span>
+                )}
+              </div>
+              <p
+                style={{
+                  fontSize: '11px',
+                  lineHeight: '1.6',
+                  color: '#000000',
+                  margin: 0,
+                }}
+              >
+                {proj.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

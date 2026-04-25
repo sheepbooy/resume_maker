@@ -15,6 +15,8 @@ const TEMPLATES: Record<string, string> = {
   simple: 'resume-simple',
   gradient: 'resume-gradient',
   academic: 'resume-academic',
+  elegant: 'resume-elegant',
+  clean: 'resume-clean',
 }
 
 declare global {
@@ -35,7 +37,7 @@ export function exportToPDF(template: string, data: ResumeData, event?: React.Mo
   // 阻止事件冒泡
   event?.stopPropagation()
 
-  // 等待 html2pdf 加载完成
+  // 用 html2pdf 导出
   if (window.html2pdf) {
     const opt = {
       margin: 0.5,
